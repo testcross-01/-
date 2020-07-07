@@ -1,0 +1,18 @@
+.top-container{
+  height: 20rpx;
+}
+
+.container{
+  height: 296rpx;
+  margin-top: 5rpx;
+  margin-bottom: 40rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  border-top-left-radius: 30rpx;
+}
+
+
+
+.list{
+  height: 128rpx;
+}

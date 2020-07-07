@@ -1,0 +1,26 @@
+<view class="cuti">
+<image class="aboutphoto" src="../../img/about.png">
+</image>
+<text class="title">关于我们</text>
+<text class="neirong">一个帮助校内导航的小程序
+我们是中南林GIS协会
+我们严谨而不呆板
+专一而不固执我们探讨合作
+将想法变为现实
+我们没什么了不起
+只是选择了我们的你们
+成为了了不起
+</text>
+</view>
+<view   class="pailie">
+<image class="tupian"  src="../../img/aboutUs2.png">
+</image>
+</view>
+<view class='recommend'>
+  <text class='recommend-title'>走进林科大</text>
+</view>
+<view class='last-view'>
+<text class='last-text'>制作者：谭卓 罗霁鑫 宋紫璇 朱妍佳 刘子为 胡权智 邹玉寅
+特别鸣谢：中南林科大爱摄影协会、林大青年公众号、罗振华
+</text>
+</view>

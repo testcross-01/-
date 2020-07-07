@@ -1,0 +1,113 @@
+/**index.wxss**/
+/* 不加page无法全屏 */
+page {
+  position: relative;
+  height: 100%;
+  background-color: white;
+}
+
+view,scroll-view{
+  box-sizing: border-box;
+}
+ 
+map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.cover{
+  position: absolute;
+  top: 40.5%;
+  left: 46.8%;
+}
+
+.dingweiImg{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.section{
+  position: relative;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+  margin-top: 15rpx;
+}
+
+.section text{
+  font-size: 40rpx;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+.nowSelected{
+  transition:all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: rotateX(360deg);
+}
+
+.both{
+  display: flex;
+  justify-content: space-around;
+}
+
+map cover-view:nth-of-type(1){
+  border-radius: 10px;
+  width: 35px;
+  height: 75px;
+  position: absolute;
+  right: 10px;
+  bottom: 45px;
+  padding: 2.5px;
+  background-color: #fefefe;
+  box-shadow: #c3c3c3 2px 2px;
+}
+
+.watchMap{
+  position: absolute;
+  right: 0.4px;
+}
+
+/* map cover-view:nth-of-type(2){
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  background-color: #fefefe;
+  box-shadow:  #c3c3c3 2px 2px;
+} */
+
+.scroll-view-item{
+  position: relative;
+  display: flex;
+  height: 50px;
+  border-top: 1px solid #f3f3f3;
+}
+
+.scroll-view-item image:first-child{
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.scroll-view-item image:last-child{
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.scroll-view-item text{
+  position: absolute;
+  left: 100px;
+  top: 10px;
+}
+
+.fangxiangView{
+  margin-top: 20rpx;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background-color: #00b26a;
+  border-radius: 50%;
+}

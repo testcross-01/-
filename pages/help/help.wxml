@@ -1,0 +1,14 @@
+<view class='HELP-container' >
+  <text style='font-size:18pt;color:#000000'>使用帮助</text>
+  <text class='line' ></text>
+  <text>1.【学校简介】</text>
+  <text class='textsize'>此页面简要介绍中南林业科技大学。</text>
+  <text>2.【地图页】</text>
+  <text class='textsize'>此页面为地图页，您可以在此页面上找到关于林科大的一些主要建筑物，查看相应建筑物的介绍，并且通过导航快速到达。</text>
+  <text>3.【林科大新旧地名对照表】</text>
+  <text class='textsize'>此页面列出了中南林科技大学新旧地名的对照表，以此来帮助同学们快速认识林科大的各个地点。</text>
+  <text>4.【意见反馈】</text>
+  <text class='textsize'>可以在此页面提交您对小程序的建议以及您遇到的此程序出现的错误，方便我们更好的了解并优化小程序。</text>
+  <text>5.【关于我们】</text>
+  <text class='textsize'>小程序的制作者均为GIS协会成员，在此页面您可以了解GIS协会。</text>
+</view>

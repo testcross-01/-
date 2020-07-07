@@ -1,0 +1,54 @@
+<view class='top-container'></view>
+<!--轮播图-->
+<swiper class="card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+  <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}">
+    <view bindtap='swiperNavigate' data-id='{{item.id}}' class="swiper-item">
+      <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+      <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+    </view>
+  </swiper-item>
+</swiper>
+
+<!--学校简介/地图页/林科大新旧地名对照表-->
+<view class='container'>
+  <view bindtap='toSchool' class="cu-bar bg-white solid-bottom" style='border-top-left-radius:30rpx;border-top-right-radius:30rpx' >
+    <view class="action list" >
+      <text class="cuIcon-form lg text-gray" style='font-size:14pt' ></text><text style='font-size:12pt'>学校简介</text>
+    </view>
+      <text class="cuIcon-right lg text-gray" style='font-size:14pt;margin-right:16rpx'></text>
+  </view>
+  <view bindtap='toMap' class="cu-bar bg-white solid-bottom"  >
+    <view class="action">
+      <text class="cuIcon-location lg text-gray" style='font-size:14pt' ></text><text style='font-size:12pt'>地图页</text>
+    </view>
+    <text class="cuIcon-right lg text-gray" style='font-size:14pt;margin-right:16rpx'></text>
+  </view>
+  <view bindtap='toOldnew' class="cu-bar bg-white solid-bottom" style='border-bottom-left-radius:30rpx;border-bottom-right-radius:30rpx' >
+    <view class="action">
+      <text class="cuIcon-read lg text-gray" style='font-size:14pt' ></text><text style='font-size:12pt'>林科大新旧地名对照表</text>
+    </view>
+    <text class="cuIcon-right lg text-gray" style='font-size:14pt;margin-right:16rpx'></text>
+  </view>
+</view>
+
+<!--使用帮助/意见反馈/关于我们-->
+<view class='container'>
+  <view bindtap='toHelp' class="cu-bar bg-white solid-bottom" style='border-top-left-radius:30rpx;border-top-right-radius:30rpx' >
+    <view class="action list" >
+      <text class="cuIcon-question lg text-gray" style='font-size:14pt' ></text><text style='font-size:12pt'>使用帮助</text>
+    </view>
+      <text class="cuIcon-right lg text-gray" style='font-size:14pt;margin-right:16rpx'></text>
+  </view>
+  <view  bindtap='toFeedback' class="cu-bar bg-white solid-bottom"  >
+    <view class="action">
+      <text class="cuIcon-message lg text-gray" style='font-size:14pt' ></text><text style='font-size:12pt'>意见反馈</text>
+    </view>
+    <text class="cuIcon-right lg text-gray" style='font-size:14pt;margin-right:16rpx'></text>
+  </view>
+  <view  bindtap='toAbout' class="cu-bar bg-white solid-bottom" style='border-bottom-left-radius:30rpx;border-bottom-right-radius:30rpx' >
+    <view class="action">
+      <text class="cuIcon-my lg text-gray" style='font-size:14pt' ></text><text style='font-size:12pt'>关于我们</text>
+    </view>
+    <text class="cuIcon-right lg text-gray" style='font-size:14pt;margin-right:16rpx'></text>
+  </view>
+</view>

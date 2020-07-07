@@ -1,0 +1,78 @@
+page{background-color:aliceblue}
+
+.juzhong{
+  color:  darkseagreen;
+margin-left: 280rpx;
+font-size: 50rpx;
+}
+
+.pailie{
+margin-top: -30rpx;
+display: flex;
+  justify-content: center;  
+}
+
+.tupian{
+width: 300rpx;
+height: 300rpx;
+}
+
+.aboutphoto{
+height: 90rpx;
+width: 90rpx;
+}
+
+.title{
+display: block;
+text-align: center;
+margin-top: 15rpx;
+font-size: 50rpx;
+color: green;
+}
+
+text.neirong{
+display: block;
+padding-top: 30rpx;
+padding-left: 50rpx;
+padding-right: 70rpx;
+color: gray;
+line-height: 70rpx;
+letter-spacing: 2rpx;
+text-align: center;
+}
+
+
+
+.recommend {
+  text-align: center;
+  height: 50rpx;
+  margin-top: 10rpx;
+  margin-bottom: 30rpx;
+}
+
+.recommend-title {
+  display: table;
+  width: 100%;
+  line-height: 50rpx;
+  white-space: nowrap;
+  border-spacing: 2rem 0;
+  font-size: 30rpx;
+  color: gray
+}
+
+.recommend-title::before, .recommend-title::after {
+  display: table-cell;
+  content: "";
+  width: 50%;
+  background: linear-gradient(#eee, #eee) repeat-x center;
+  background-size: 0.1rem 0.1rem;
+}
+
+.last-view{
+  line-height: 1.5em;
+}
+
+.last-text{
+  color: gray;
+  font-size: 9pt;
+}

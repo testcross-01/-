@@ -1,0 +1,53 @@
+<!--pages/advice/advice.wxml-->
+
+	
+  <form bindsubmit='submit'>
+		<view class="cu-form-group margin-top">
+		<view class="title" >是否Android系统</view>
+		<switch  checked name='isAndroid'></switch>
+    </view>
+    	<view class="cu-form-group">
+		<view class="title">邮箱</view>
+		<input placeholder="请输入你的邮箱" name='email'></input>
+    </view>
+
+
+<view class="cu-bar bg-white margin-top">
+		<view class="action">
+			具体建议
+		</view>
+    </view>
+	<view class="cu-form-group adjust" style='height:500rpx'> 
+  	
+		 <textarea maxlength="-1" style='height:500rpx'  placeholder="请在此处输入您的具体建议" name='feedbackText'></textarea>
+    
+	</view>
+	
+
+    <view class="cu-bar bg-white margin-top">
+		<view class="action">
+			问题图片上传
+		</view>
+		<view class="action">
+			{{imgList.length}}/1
+		</view>
+	</view>
+  <view class="cu-form-group">
+		<view class="grid col-4 grid-square flex-sub">
+			<view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+				<image src='{{imgList[index]}}' mode='aspectFill'></image>
+				<view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+					<text class="cuIcon-close"></text>
+				</view>
+			</view>
+			<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<1}}">
+				<text class="cuIcon-cameraadd"></text>
+			</view>
+		</view>
+	</view>
+  <view class="clear"/>
+  <view class="padding flex flex-direction bottom">
+<button class="cu-btn bg-green margin-tb-sm lg"  form-type='submit'>提交
+</button>   
+</view>
+  </form>

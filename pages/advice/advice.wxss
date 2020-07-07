@@ -1,0 +1,24 @@
+/* pages/advice/advice.wxss */
+.cu-form-group .title {
+  min-width: calc(4em + 30rpx);  
+}
+.center{
+ 	margin: auto;
+	text-align: center;
+}
+.cu-btn bg-green margin-tb-sm lg{
+  margin-bottom: 10rpx;
+}
+.bottom{
+  width: 100%;
+  position: fixed;
+  bottom:0px;
+}
+.action{
+  margin: 2rpx;
+}
+.clear{
+  width: 100%;
+  height: 163rpx;
+  display: flex;
+}

@@ -1,0 +1,38 @@
+
+<!--index.wxml-->
+<view class='view' style='width: 100%; height:{{height}};'>
+  <map id='mapid' longitude="{{nowLongitude}}" latitude="{{nowLatitude}}" markers="{{markers}}" covers="{{covers}}" controls="{{controls}}"  bindcallouttap="callouttap" subkey="YAHBZ-H2AWQ-OW75L-GHBNL-4A34K-C6F7H" show-location scale="{{scale}}" polyline="{{polyline}}" enable-3D="true">
+    <cover-view>
+    <cover-image bindtap='helpView' src='./icons/help.png' style='width:35px; height:35px'></cover-image>
+    <cover-image bindtap="chooseMapViewTap" class='watchMap' src='./icons/ditu.png' style='width:40px; height:40px'></cover-image>
+    </cover-view>
+    <!-- <cover-view bindtap="chooseMapViewTap">
+    <cover-image  class='watchMap' src='./icons/ditu.png' style='width:40px; height:40px'></cover-image>
+    </cover-view> -->
+    <cover-view wx:if="{{isShow}}" class="cover" bindtap="cover">
+      <cover-image class="dingweiImg" src="./icons/dingwei.png"/>
+    </cover-view>
+  </map>
+</view>
+
+<view class="section" bindtap='show'>
+<text>全部建筑预览</text>
+<view class='fangxiangView'>
+<image animation='{{animation}}' src='{{fangxiangSrc}}' mode='widthFix' style='width:24px;'></image>
+</view>
+</view>
+
+<scroll-view
+    wx:if="{{hide}}"
+    scroll-y
+    style="height: 200px;"
+  >
+    <view wx:for="{{markers}}"  class="scroll-view-item">
+    <view bindtap='clickToIntroduce' data-id="{{item.id}}"  style='width:640rpx;'>
+    <image style='width:80px; height:40px;' src='https://www.testcross.cn/Map/img/{{item.id}}.jpg'></image>
+    <text>{{item.title}}</text>
+    </view>
+    <image bindtap='daohangImg' data-id="{{item.id}}" mode='widthFix' style='width: 30px; height: 30px;' src='../../img/daohang.png'></image>
+    </view>
+  </scroll-view>
+ 

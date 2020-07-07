@@ -1,0 +1,2 @@
+@import "pages/colorui/main.wxss";
+@import "pages/colorui/icon.wxss";

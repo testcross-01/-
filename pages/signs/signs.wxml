@@ -1,0 +1,17 @@
+<view wx:if="{{isShow}}" class='main'>
+
+  <view class='img_box'>
+    <image  class='img' src='{{src}}'></image>
+  </view>
+
+<view class='name'>
+<text>{{name}}</text>
+<image wx:if="{{!add}}" bindtap='daohang' src="/img/daohang.png"></image>
+<image wx:if="{{add}}" bindtap='toMap' src="/img/map.png"></image>
+</view>
+
+    <view class='text_box'>
+  <text>{{text}}</text>
+  </view>
+
+</view>

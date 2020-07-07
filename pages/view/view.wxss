@@ -1,0 +1,50 @@
+page{background-color:aliceblue}
+.flex{
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.aboutphoto{
+height: 350rpx;
+width: 100%;
+}
+
+.kuai{
+position:relative;
+margin-left: 570rpx;
+margin-top: -50rpx;
+height:120rpx;
+width:120rpx; 
+font-size: 27rpx;
+background-color: #F0FFF0;
+display: block;
+padding-top: 10rpx;
+border-radius: 120rpx;
+line-height: 50rpx;
+color: gray;
+}
+
+.zhi{
+  margin-top: 30rpx;
+  margin-bottom:50rpx;
+  margin-left: 30rpx;
+  font-size: 35rpx;
+  letter-spacing:2rpx;
+  line-height: 40rpx;
+  text-indent: 2em;
+}
+.name{
+  margin-left: 30rpx;
+  color: green;
+  font-size: 40rpx;
+}
+
+.name2{
+  margin-left: 30rpx;
+  color: green;
+  font-size: 30rpx;
+}
+.kuai2{
+  color:green;
+}
