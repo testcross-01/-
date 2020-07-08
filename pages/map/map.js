@@ -34,19 +34,7 @@ Page({
     wx.showLoading({
       title: '标记点加载中'
     })
-    /*
-    读取本地缓存
-    */
-    // var that =this
-    // wx.getStorage({
-    //   key: 'markers',
-    //   success: function(res) {
-    //     console.log(res)
-    //     that.setData({
-    //       markers:res.data
-    //     })
-    //   },
-    // })
+   
     // 获取设备的信息 
     var that = this
     wx.getSystemInfo({
@@ -92,55 +80,43 @@ Page({
       }
 
     })
-    wx.getStorage({
-      key: 'markers',
-      success: function(res) {
-       // console.log(res.data)
-        console.log(res.data)
-        if(res.data.length>0){
-        that.setData({ markers: res.data})
-        app.globalData.marks=res.data
-        console.log("通过缓存获得数据")
-          setTimeout(function () {
-            wx.hideLoading()
-          }, 1000)
-        return }
-        
-      },
-    })
-    
-   
-   
-    if (app.globalData.marks.length > 0) {
+    //修改点
+   //判断此时是否有marker数据
+    if (app.globalData.markers!=null &app.globalData.markers!='') {
       console.log("app请求先执行完");
-      this.setData({ markers: app.globalData.marks })
-      wx.setStorage({
-        key: 'markers',
-        data: app.globalData.marks,
-      })
+      this.setData({ markers: app.globalData.markers })
       setTimeout(function () {
         wx.hideLoading()
       }, 1000)
+    }else{
+      if(app.globalData.loading===false){
+        setTimeout(function () {
+          wx.hideLoading({
+            complete: (res) => {
+              wx.showToast({
+                icon:'none',
+                title: '加载失败',
+              })
+            },
+          })
+        }, 1000);
+      }
+      app.markersCallback = res => {
+        console.log("pageonload 先执行完");
+        if(app.globalData.loading===true)
+        this.setData({ markers: app.globalData.markers })
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 1000);
+      };
+
+      
     }
 
+   
 
-    app.marksCallback = res => {
-      console.log("pageonload 先执行完");
-      this.setData({ markers: app.globalData.marks })
-      wx.setStorage({
-        key: 'markers',
-        data: app.globalData.marks,
-      })
-      setTimeout(function () {
-        wx.hideLoading()
-      }, 1000);
-    };
-    // wx.showLoading({
-    //   title: "定位中",
-    //   mask: true
-    // })
- 
 
+   
   },
 
 
@@ -207,82 +183,7 @@ Page({
       name:'目的地',
       scale: 18,
     })
-
-
-    
-    // wx.chooseLocation({
-    //   type: 'gcj02',
-    //   success: function (res) {
-    //     // success
-    //     console.log(res)
-
-    //     var choosePoint = [{
-    //       iconPath: './icons/dingweidian.png',
-    //       id: that.data.markers.length,
-    //       latitude: res.latitude,
-    //       longitude: res.longitude,
-    //       width: 50,
-    //       height: 50,
-    //       callout: {
-    //         content: res.name,
-    //         bgColor: "#00b26a",
-    //         borderRadius: 5,
-    //         color: "#ffffff",
-    //         fontSize: 16
-    //       },
-    //       name: res.name,
-    //       address: res.address
-    //     }]
-
-        
-    //   },
-    //   fail: function (err) {
-    //     console.log(err)
-    //   },
-    //   complete: function () {
-    //     //接口调用结束的回调函数（调用成功，失败都会执行）
-    //   }
-    // })
   },
-
-
-  /*
-  挪动地图时发生
-  */
-  // regionchange(e) {
-  //   // console.log(e.type)
-  //   if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
-  //     // console.log(e)
-  //     var that = this
-  //     this.mapctx = wx.createMapContext("mapid", that) //创建一个地图实例
-  //     this.mapctx.getCenterLocation({
-  //       type: 'gcj02',
-  //       success: function (res) {
-  //         // console.log(res)
-  //         that.setData({
-  //           longitude: res.longitude,
-  //           latitude: res.latitude
-  //         })
-  //       }
-  //     })
-  //   }
-  // },
-
-
-  /*
-  点击地图时发生
-  */
-  // maptap(e) {
-  //   wx.hideToast({
-  //     success:function(){
-
-  //     }})
-
-  //   var isShow = this.data.isShow
-  //   this.setData({
-  //     isShow: !isShow
-  //   })
-  // },
 
   helpView(e) {
     wx.navigateTo({
@@ -318,52 +219,6 @@ Page({
       longitude: this.data.markers[index].longitude,
       scale:18
     })
-
-    //   //调用距离计算接口
-    //   qqmapsdk.direction({
-    //     mode: 'walking',//可选值：'driving'（驾车）、'walking'（步行）、'bicycling'（骑行），不填默认：'driving',可不填
-    //     //from参数不填默认当前地址
-    //     from: {
-    //       latitude:this.data.markers[0].latitude,
-    //       longitude: this.data.markers[0].longitude
-    //     },
-    //     to: {
-    //       latitude: this.data.latitude,
-    //       longitude: this.data.longitude
-    //     },
-    //     success: function (res) {
-    //       console.log(res);
-    //       var ret = res;
-    //       var coors = ret.result.routes[0].polyline, pl = [];
-    //       //坐标解压（返回的点串坐标，通过前向差分进行压缩）
-    //       var kr = 1000000;
-    //       for (var i = 2; i < coors.length; i++) {
-    //         coors[i] = Number(coors[i - 2]) + Number(coors[i]) / kr;
-    //       }
-    //       //将解压后的坐标放入点串数组pl中
-    //       for (var i = 0; i < coors.length; i += 2) {
-    //         pl.push({ latitude: coors[i], longitude: coors[i + 1] })
-    //       }
-    //       console.log(pl)
-    //       //设置polyline属性，将路线显示出来,将解压坐标第一个数据作为起点
-    //       that.setData({
-    //         latitude: pl[pl.length-1].latitude,
-    //         longitude: pl[pl.length - 1].longitude,
-    //         polyline: [{
-    //           points: pl,
-    //           color: '#FF0000DD',
-    //           width: 4
-    //         }]
-    //       })
-    //     },
-    //     fail: function (error) {
-    //       console.error(error);
-    //     },
-    //     complete: function (res) {
-    //       console.log(res);
-    //     }
-
-    // })
   },
 
   /*
@@ -453,10 +308,11 @@ Page({
   clickToIntroduce(e){
     console.log(e.currentTarget.dataset)
     var item = e.currentTarget.dataset
+    console.log(item.id)
     var that = this
     this.setData({
-      latitude:app.globalData.marks[item.id].latitude,
-      longitude: app.globalData.marks[item.id].longitude
+      latitude:that.data.markers[item.id].latitude,
+      longitude: that.data.markers[item.id].longitude
     })
     this.scale(19)
     wx.navigateTo({

@@ -29,7 +29,7 @@
   >
     <view wx:for="{{markers}}"  class="scroll-view-item">
     <view bindtap='clickToIntroduce' data-id="{{item.id}}"  style='width:640rpx;'>
-    <image style='width:80px; height:40px;' src='https://www.testcross.cn/Map/img/{{item.id}}.jpg'></image>
+    <image lazy-load="true" style='width:80px; height:40px;' src='cloud://map-915.6d61-map-915-1302455625/buildingIMG/{{item.id}}.jpg'></image>
     <text>{{item.title}}</text>
     </view>
     <image bindtap='daohangImg' data-id="{{item.id}}" mode='widthFix' style='width: 30px; height: 30px;' src='../../img/daohang.png'></image>

@@ -1,5 +1,10 @@
+
 const app = getApp();
 
+/**
+ * 增加图片上传的数量
+ * 更改文件上传和提交表单的方式
+ */
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
@@ -9,10 +14,14 @@ Page({
     isAndroid:true,//手机机型
     email:null,//电子邮箱
     index: null,//图片序列号
-    imgPath :null,//图片
+    imgPaths :[],//图片
     feedbackText: '',//具体意见  
   },
-  imgList: []
+  imgList: [],
+  imgNum:6
+  },
+  onLoad(){
+   
   },
   switchChange(e){
     this.setData({
@@ -27,15 +36,18 @@ Page({
   
   ChooseImage() {
     wx.chooseImage({
-      count: 1, //默认9
+      count: this.data.imgNum, 
       sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album'], //从相册选择
       success: (res) => {
         if (this.data.imgList.length != 0) {
+        
+          console.log(res.tempFilePaths)
           this.setData({
             imgList: this.data.imgList.concat(res.tempFilePaths)
           })
         } else {
+          console.log(res.tempFilePaths)
           this.setData({
             imgList: res.tempFilePaths
           })
@@ -65,64 +77,95 @@ Page({
       }
     })
   },
-
    submit(e) {//将表单各项数据赋值给feedback并向服务器发起请求（传递数据）
-     var that=this;
-   wx.showLoading({
-     title: '反馈提交中！',
-   })
+    wx.showLoading({
+      title: '提交中',
+    })
+    var that=this;
     this.data.feedback.isAndroid = e.detail.value.isAndroid;
     this.data.feedback.email = e.detail.value.email;
     this.data.feedback.feedbackText = e.detail.value.feedbackText;
     this.data.feedback.openid =app.globalData.openid
-    //console.log(this.data.feedback);
-    
-   //上传图片
-    if(this.data.imgList.length>0){
-    wx.uploadFile({
-      url: 'https://www.testcross.cn/Map/AddImageServlet',
-      filePath: this.data.imgList[0],
-      name: 'image',
-      success(res){
-        that.data.feedback.imgPath=res.data;
-        console.log(res.data);
-        //上传反馈表单
-        wx.request({
-          url: 'https://www.testcross.cn/Map/AddFeedbackInfoServlet',
-          data: that.data.feedback,
-          success(res) {
-            console.log(res.data)
-            wx.hideLoading()
-            if (res.data == '上传成功！') {
-              wx.navigateBack({
-              })
-            }
+   
+    this.updateIMG().then(res=>{  
+      //上传反馈表   
+      wx.cloud.callFunction({
+        name:"addFeedback",
+        data:{
+          feedback:this.data.feedback
+        },
+        //云函数调用成功
+        success(res){
+          wx.hideLoading()
+          if(res.result==-1){
             wx.showToast({
-              title: res.data,
-              icon: 'none'
+              icon:'none',
+              title: '建议中涉及敏感词',
+              duration:2000
+            })
+          }else{
+            wx.showModal({
+              title:"提交成功",
+              content:'是否返回主页',
+              success(res){
+                if(res.confirm){
+                  wx.redirectTo({
+                    url: '/pages/first/first',
+                  })
+                }
+              }
             })
           }
-        })
-      }
-    })
-  }else{
-  //上传反馈表单
-     wx.request({
-       url: 'https://www.testcross.cn/Map/AddFeedbackInfoServlet',
-       data: this.data.feedback,
-       success(res) {
-         console.log(res.data)
-         wx.hideLoading()
-         if (res.data =='上传成功！'){
-           wx.navigateBack({
-           })
-       }
-         wx.showToast({
-           title: res.data,
-           icon: 'none'
-         })
-       }
+        },
+        fail(res){
+          wx.showToast({
+            icon:'none',
+            title: '提交失败',
+            duration:2000
+          })
+        }
+      })}
+     ).catch(res=>{
+      wx.hideLoading()
+       wx.showToast({
+        icon:'none',
+        title: '提交失败',
+        duration:2000
+      })
+
+     }
+       
+     )
+   
+  },
+  updateIMG(){
+    var that=this
+     //上传图片
+     var pArr=[]
+     for(var i=0;i<that.data.imgList.length;i++){
+      var promise=new Promise((resolve,reject)=>{
+         wx.cloud.uploadFile({
+         cloudPath: 'feedbackIMG/'+that.data.imgList[i].replace(/(.*\/)*([^.]+)/i,"$2"), // 上传至云端的路径
+         filePath: that.data.imgList[i], // 小程序临时文件路径
+         success: res => {
+           // 返回文件 ID
+           resolve(res)
+         },
+         fail:res=>{
+           reject(res)
+         }
+       })
      })
-    }
+     pArr.push(promise);
+   }
+  return Promise.all(pArr).then(
+     res=>{
+       res.forEach(
+         item=>{
+          that.data.feedback.imgPaths.push(item.fileID)
+         }
+       )
+   }
+   )
   }
 })

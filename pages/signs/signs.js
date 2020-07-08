@@ -35,9 +35,9 @@ Page({
     this.data.id=id
       this.setData({
         isShow: true,
-        src: 'https://www.testcross.cn/Map/img/'+id+'.jpg',
-        name: app.globalData.marks[id].title,
-        text: app.globalData.marks[id].text
+        src: 'cloud://map-915.6d61-map-915-1302455625/buildingIMG/'+id+'.jpg',
+        name: app.globalData.markers[id].title,
+        text: app.globalData.markers[id].text
       })
 
   },
