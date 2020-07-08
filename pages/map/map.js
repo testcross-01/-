@@ -19,9 +19,11 @@ Page({
     isShow: false,
     hide:false,
     markers: [],
+    latitude:28.132686137740553,
+    longitude:112.99649167340756,
     nowLatitude:0,
     nowLongitude:0,
-    scale: 18
+    scale: 16
   },
   //事件处理函数
   bindViewTap: function () {
@@ -84,7 +86,17 @@ Page({
    //判断此时是否有marker数据
     if (app.globalData.markers!=null &app.globalData.markers!='') {
       console.log("app请求先执行完");
-      this.setData({ markers: app.globalData.markers })
+      var markers=[]
+      app.globalData.markers.forEach(
+        item=>{
+          var marker=item
+          marker.iconPath="../../img/"+item.type+".png"
+          marker.width=25
+          marker.height=25
+          markers.push(marker)
+        }
+      )
+      this.setData({ markers: markers })
       setTimeout(function () {
         wx.hideLoading()
       }, 1000)
@@ -103,8 +115,20 @@ Page({
       }
       app.markersCallback = res => {
         console.log("pageonload 先执行完");
+        //if(app.globalData.loading===true)
+        var markers=[]
+        app.globalData.markers.forEach(
+          item=>{
+            var marker=item
+            marker.iconPath="../../img/"+item.type+".png"
+            marker.width=25
+            marker.height=25
+            markers.push(marker)
+          }
+        )
         if(app.globalData.loading===true)
-        this.setData({ markers: app.globalData.markers })
+        this.setData({ markers:markers })
+       
         setTimeout(function () {
           wx.hideLoading()
         }, 1000);

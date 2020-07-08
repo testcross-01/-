@@ -1,3 +1,4 @@
+var app=getApp()
 Page({
   data: {
     cardCur: 0,
@@ -22,6 +23,10 @@ Page({
   onLoad() {
     this.towerSwiper('swiperList');
     // 初始化towerSwiper 传已有的数组名即可
+    if(app.globalData.openid==='oX16p5T2RvvshCOyp5IYPTNGPp9Q')
+    this.setData({
+      admin:true
+    })
   },
   DotStyle(e) {
     this.setData({
@@ -45,6 +50,11 @@ Page({
     this.setData({
       swiperList: list
     })
+  },
+  toAdmin(e){
+      wx.navigateTo({
+        url: '/pages/admin/admin',
+      })
   },
   // towerSwiper触摸开始
   towerStart(e) {

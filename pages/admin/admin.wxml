@@ -1,0 +1,19 @@
+
+
+<view class="cu-card article {{isCard?'no-card':''}}" wx:for="{{feedbackList}}">
+  <view class="cu-item shadow">
+    <view class="title">
+      <view class="text-cut">{{item.email}}</view>
+    </view>
+    <view class="content">
+      <image src="{{item.imgPaths[0]}}" mode="aspectFill"></image>
+      <view class="desc">
+        <view class="text-content"> {{item.feedbackText}}</view>
+        <view>
+          <view wx:if="{{item.isAndroid}}" class="cu-tag bg-blue light sm round">android</view>
+          <view wx:if="{{!item.isAndroid}}" class="cu-tag bg-green light sm round">ios</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

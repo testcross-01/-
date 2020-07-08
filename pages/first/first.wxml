@@ -45,7 +45,7 @@
     </view>
     <text class="cuIcon-right lg text-gray" style='font-size:14pt;margin-right:16rpx'></text>
   </view>
-   <view wx:if="{{admin}}"  bindtap='toFeedback' class="cu-bar bg-white solid-bottom"  >
+   <view wx:if="{{admin}}"  bindtap='toAdmin' class="cu-bar bg-white solid-bottom"  >
     <view class="action" >
       <text class="cuIcon-message lg text-gray" style='font-size:14pt' ></text><text style='font-size:12pt'>反馈列表</text>
     </view>

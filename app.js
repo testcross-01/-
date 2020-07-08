@@ -30,7 +30,7 @@ App({
     //           title:item.title,
     //           latitude:item.latitude,
     //           longitude:item.longitude,
-    //           type:'',
+    //           type:'jiaoyu',
     //           text:item.text
     //         }
     //         markers.push(mark)
